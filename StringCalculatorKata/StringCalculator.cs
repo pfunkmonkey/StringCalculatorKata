@@ -9,19 +9,11 @@ namespace StringCalculatorKata
 
         public int Add(string numberString)
         {
-            var subStringId = 1;
-
-            List<char> delimiter = new List<char>();
+            char[] delimiter = new char[] { ',', '\n' };
 
             if (string.IsNullOrEmpty(numberString)) return 0;
-                var values = numberString.IndexOf("//", StringComparison.Ordinal);
 
-                if (values >-1)
-                    delimiter.Add(numberString[values + 2]);
-            delimiter.AddRange(new List<char> { ',', '\n' });
-
-
-            var splitString = numberString.Split(delimiter.ToArray());
+            var splitString = numberString.Split(delimiter);
             var total = CalculateSum(splitString);
             return total;
         }

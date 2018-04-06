@@ -53,14 +53,5 @@ namespace StringCalculatorTests
             var total = stringCalculator.Add("7,0,5\n1");
             Assert.IsTrue(total == 13);
         }
-
-        [TestMethod]
-        public void StringCalculator_CustomDelimiters_StringIsParsedCorrectly()
-        {
-            var stringCalculator = new StringCalculator();
-            var total = stringCalculator.Add("//;\n1;2");
-            Assert.IsTrue(total == 13);
-        }
-
     }
 }
