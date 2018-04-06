@@ -10,7 +10,7 @@ namespace StringCalculatorTests
         [TestMethod]
         public void StringCalculator_WhenEmpty_ReturnZero()
         {
-            var stringCalculator=new StringCalculator();
+            var stringCalculator = new StringCalculator();
             var total = stringCalculator.Add("");
             Assert.IsTrue(total == 0);
         }
