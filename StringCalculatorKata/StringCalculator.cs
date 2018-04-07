@@ -24,7 +24,15 @@ namespace StringCalculatorKata
 
         private static int CalculateSum(IEnumerable<string> numbers)
         {
-            return numbers.Select(i => int.Parse(i)).Sum();
+            return numbers.Select(i => ParseValues(i)).Sum();
+        }
+
+        private static int ParseValues(string i)
+        {
+            var value = int.Parse(i);
+            if (value<0 ) 
+                throw new Exception("Negatives not allowed");
+            return int.Parse(i);
         }
 
         public char GetAdditionalDelimiters(ref string numberString)
