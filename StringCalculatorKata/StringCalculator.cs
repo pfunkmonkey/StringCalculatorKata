@@ -24,20 +24,12 @@ namespace StringCalculatorKata
 
         private static int CalculateSum(IEnumerable<string> numbers)
         {
-            var values = numbers.Select(number => int.Parse(number)).Where(i=>i<=1000);
-            if (values.Any(number => number < 0))
+            var values = numbers.Select(int.Parse).Where(i => i <= 1000);
+            if (!values.Any(number => number < 0)) return values.Sum();
             {
                 var errorMessage = string.Join(",", values.Where(number => number < 0)).Trim();
                 throw new ApplicationException(errorMessage);
             }
-
-            return values.Sum();
-        }
-
-        private static int ParseValues(string i)
-        {
-            var value = int.Parse(i);
-            return int.Parse(i);
         }
 
         public char GetAdditionalDelimiters(ref string numberString)
