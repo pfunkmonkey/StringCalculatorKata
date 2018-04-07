@@ -30,8 +30,8 @@ namespace StringCalculatorKata
         private static int ParseValues(string i)
         {
             var value = int.Parse(i);
-            if (value<0 ) 
-                throw new Exception("Negatives not allowed");
+            if (value < 0)
+                throw new ApplicationException(value.ToString());
             return int.Parse(i);
         }
 
