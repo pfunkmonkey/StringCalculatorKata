@@ -10,7 +10,7 @@ namespace StringCalculatorKata
         public int Add(string numberString)
         {
             List<char> defaultDelimiters = new List<char> { ',', '\n' };
-          
+
             defaultDelimiters.Add(GetAdditionalDelimiters(ref numberString));
 
             if (string.IsNullOrEmpty(numberString)) return 0;
@@ -24,14 +24,19 @@ namespace StringCalculatorKata
 
         private static int CalculateSum(IEnumerable<string> numbers)
         {
-            return numbers.Select(i => ParseValues(i)).Sum();
+            var values = numbers.Select(number => int.Parse(number)).Where(i=>i<=1000);
+            if (values.Any(number => number < 0))
+            {
+                var errorMessage = string.Join(",", values.Where(number => number < 0)).Trim();
+                throw new ApplicationException(errorMessage);
+            }
+
+            return values.Sum();
         }
 
         private static int ParseValues(string i)
         {
             var value = int.Parse(i);
-            if (value < 0)
-                throw new ApplicationException(value.ToString());
             return int.Parse(i);
         }
 

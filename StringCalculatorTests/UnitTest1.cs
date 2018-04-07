@@ -77,10 +77,31 @@ namespace StringCalculatorTests
         }
 
         [Test]
-        public void add_whenNegativeNumnber_exceptionisthrownwithappropriatemessage(string numbers, string expectedResult)
+        public void add_whenNegativeNumnber_exceptionisthrownwithMessageequaltovalueofnegativenumber()
         {
-            var total =
-                Assert.Throws<ApplicationException>(() => { stringCalculator.Add("7\n0, 5\n1, -1, 5"); }, expectedResult);
+
+            var exception=Assert.Throws<ApplicationException>(() => { stringCalculator.Add("7\n0, 5\n1, -1, 5"); });
+
+            Assert.AreEqual(exception.Message,"-1");
+        }
+
+        [TestCase("-1, 4\n4, -5,0", "-1,-5")]
+        [TestCase("//;\n-6;4\n4, 5,-4,10", "-6,-4")]
+        public void add_whenNegativeNumnbesr_exceptionisthrownwithMessageContainingAllTheNegativeNumbers(string numbers, string expectedResult)
+        {
+
+            var exception = Assert.Throws<ApplicationException>(() => { stringCalculator.Add("7\n0, 5\n1, -1, 5"); });
+
+            Assert.AreEqual(exception.Message, "-1");
+        }
+
+        [TestCase("7\n0, 5\n1, 4, 5, 22\n10005",44)]
+        [TestCase("2004\n0, 5\n1, 1004, 5, 22\n10005", 33)]
+        [TestCase("2004\n0, 5\n1, 1004, 5, 22\n10001", 33)]
+        public void add_WhenNumberisGreaterThan1000_IgnoreNumbersGreaterthan10000(string numbers, int expectedResult)
+        {
+            var total = stringCalculator.Add(numbers);
+            Assert.IsTrue(total == expectedResult);
         }
 
     }
